@@ -1,0 +1,54 @@
+{
+  "paths": {
+    "data_file": "data/keywords.xlsx",
+    "output_dir": "output",
+    "logo_path": "assets/logo.png",
+    "font_path": "assets/fonts/font.ttf"
+  },
+  "sheets": {
+    "data_sheet": "Data",
+    "config_sheet": "Cấu Hình"
+  },
+  "openai": {
+    "model": "gpt-4.1"
+  },
+  "replicate": {
+    "model": "black-forest-labs/flux-1.1-pro",
+    "version": null
+  },
+  "wordpress": {
+    "default_post_status": "publish",
+    "seo_plugin": "rankmath"
+  },
+  "facebook": {
+    "enabled": true,
+    "graph_version": "v19.0"
+  },
+  "image": {
+    "raw_size": 1024,
+    "crop_px": 8,
+    "final_size": 1000,
+    "webp_quality": 85,
+    "overlay_opacity": 0.35,
+    "max_h2_images": 3
+  },
+  "rate_limit": {
+    "min_seconds": 15,
+    "max_seconds": 30
+  },
+  "prompts": {
+    "system_prompt_web_seo": "Bạn là một chuyên gia biên tập nội dung SEO người Việt với hơn 10 năm kinh nghiệm thực chiến. Viết bài chuẩn SEO, giọng văn tự nhiên như người thật.",
+    "system_prompt_social": "Bạn là một quản trị viên Fanpage Facebook chuyên nghiệp, viết caption ngắn gọn, cuốn hút, tự nhiên bằng tiếng Việt.",
+    "image_style_prompt": "modern flat illustration, soft gradient background, professional, clean, high quality, editorial style",
+    "banned_words": [
+      "Kỷ nguyên số",
+      "Tóm lại",
+      "Nhìn chung",
+      "Hơn nữa",
+      "Đáng chú ý là",
+      "Trong thế giới ngày nay",
+      "Không thể phủ nhận",
+      "Điều quan trọng cần lưu ý"
+    ]
+  }
+}

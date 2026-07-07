@@ -1,0 +1,20 @@
+python main.py run-once
+python main.py retry-facebook // đăng bù nếu đăng fb book lỗi
+Cách hoạt động (an toàn với WordPress):
+1. Quét các dòng trạng thái Success nhưng Link Fanpage trống và có sẵn URL ảnh.
+  - Mặc định: chỉ lấy dòng có lỗi Facebook trong nhật ký (đúng ca "web đã đăng, FB lỗi").
+  - --include-skipped: lấy thêm dòng từng đăng khi FB bị tắt.
+2. Dùng lại caption + URL ảnh đã lưu trong Excel để đăng lại chỉ phần Facebook. Không đụng tới WordPress → không lo trùng bài.
+3. Thành công → ghi Link Fanpage, xóa lỗi cũ. Thất bại → ghi lỗi chi tiết mới, dòng khác vẫn chạy tiếp.
+
+Đã kiểm tra
+
+- Biên dịch OK cả 4 file.
+- Dò dòng đúng: mặc định rỗng, --include-skipped bắt được Row 2 & 3.
+- CLI parse OK.
+
+Lưu ý về Row 4
+
+Bạn đã đổi thủ công Row 4 về Pending (nhật ký lỗi + link web đã bị xóa). Nên giờ không cần retry-facebook cho nó — lần chạy run-once tới sẽ tự làm lại toàn bộ WP + Facebook cho Row 4.
+
+Nếu muốn đăng luôn Facebook cho 2 bài cũ (Row 2, 3) đã có trên web, chạy: python main.py retry-facebook --include-skipped.

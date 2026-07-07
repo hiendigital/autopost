@@ -1,0 +1,24 @@
+09:29:27 [INFO] main: DRY_RUN is OFF — hitting real services.
+09:29:29 [INFO] src.pipeline: Processing row 3 — keyword: thiết kế web homestay
+09:29:29 [INFO] src.pipeline: Found 1 internal link candidate(s).
+09:29:40 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:30:07 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:30:08 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:30:16 [INFO] httpx: HTTP Request: POST https://api.replicate.com/v1/models/recraft-ai/recraft-v3/predictions "HTTP/1.1 201 Created"
+09:30:17 [INFO] httpx: HTTP Request: GET https://replicate.delivery/xezq/NzJIRrV1OiZ0ARTDJAXdYkYdeUdSfNLz5XBxhgcldTO2UM2WA/tmpkzxhzhfy.webp "HTTP/1.1 200 OK"
+09:30:18 [INFO] src.image_pipeline: Saved branded image output\img_75189404aa4b.webp
+09:30:37 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:30:43 [INFO] httpx: HTTP Request: POST https://api.replicate.com/v1/models/recraft-ai/recraft-v3/predictions "HTTP/1.1 201 Created"
+09:30:43 [INFO] httpx: HTTP Request: GET https://replicate.delivery/xezq/tm4dfaDxK5QZcKlyNKeNxx0pWzeXHsfExMjuIadKmXRFVxYbB/tmpgigyp92s.webp "HTTP/1.1 200 OK"
+09:30:44 [INFO] src.image_pipeline: Saved branded image output\img_8cc76f21dfac.webp
+09:31:08 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:31:14 [INFO] httpx: HTTP Request: POST https://api.replicate.com/v1/models/recraft-ai/recraft-v3/predictions "HTTP/1.1 201 Created"
+09:31:14 [INFO] httpx: HTTP Request: GET https://replicate.delivery/xezq/fFHmsSbXEGwTDy1NNykRsu3fLc9ao63W66gdqtQhJifhrYstA/tmpd2cpgxmm.webp "HTTP/1.1 200 OK"
+09:31:15 [INFO] src.image_pipeline: Saved branded image output\img_d29a11e6a0e6.webp
+09:31:41 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:31:47 [INFO] httpx: HTTP Request: POST https://api.replicate.com/v1/models/recraft-ai/recraft-v3/predictions "HTTP/1.1 201 Created"
+09:31:48 [INFO] httpx: HTTP Request: GET https://replicate.delivery/xezq/LTjcbukhLxojPlyW9PyyRfVgKAcTDZTkOzBPVbNX9XSJLGbLA/tmpmzev6o61.webp "HTTP/1.1 200 OK"
+09:31:49 [INFO] src.image_pipeline: Saved branded image output\img_f76d47c800da.webp
+09:32:18 [INFO] src.pipeline: Facebook disabled (facebook.enabled=false) — skipping album.
+09:32:18 [INFO] src.pipeline: Row 3 SUCCESS — web: https://revenue.com.vn/?p=844 | fb: 
+09:32:18 [INFO] src.pipeline: Kept 4 temp image(s) in output/ for inspection.

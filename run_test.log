@@ -1,0 +1,24 @@
+09:23:13 [INFO] main: DRY_RUN is OFF — hitting real services.
+09:23:14 [INFO] src.pipeline: Processing row 3 — keyword: thiết kế web homestay
+09:23:15 [INFO] src.pipeline: Found 1 internal link candidate(s).
+09:23:35 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:23:58 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:23:59 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:24:06 [INFO] httpx: HTTP Request: POST https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions "HTTP/1.1 201 Created"
+09:24:06 [INFO] httpx: HTTP Request: GET https://replicate.delivery/xezq/CC9HNYOsgX7pNRY2HINffCwGW55zc0sBYfW2epErHugT8wYbB/tmp13ee4vw3.png "HTTP/1.1 200 OK"
+09:24:08 [INFO] src.image_pipeline: Saved branded image output\img_e0acbbc4d114.webp
+09:24:27 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:24:34 [INFO] httpx: HTTP Request: POST https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions "HTTP/1.1 201 Created"
+09:24:34 [INFO] httpx: HTTP Request: GET https://replicate.delivery/xezq/b8WczdpzTUb4IRrCamfl6tGm4fN9ZRK3C2ZvXBV9Du3gPM2WA/tmpbja2scws.png "HTTP/1.1 200 OK"
+09:24:35 [INFO] src.image_pipeline: Saved branded image output\img_c82f1fc9305a.webp
+09:24:56 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:25:01 [INFO] httpx: HTTP Request: POST https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions "HTTP/1.1 201 Created"
+09:25:02 [INFO] httpx: HTTP Request: GET https://replicate.delivery/xezq/ftZqifqlLPvjmkdm2Vi9hyegh0iV8JuYXQHwASueghKsfhx2C/tmp66epesdt.png "HTTP/1.1 200 OK"
+09:25:03 [INFO] src.image_pipeline: Saved branded image output\img_30ba54b52a57.webp
+09:25:33 [INFO] httpx: HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+09:25:39 [INFO] httpx: HTTP Request: POST https://api.replicate.com/v1/models/black-forest-labs/flux-1.1-pro/predictions "HTTP/1.1 201 Created"
+09:25:39 [INFO] httpx: HTTP Request: GET https://replicate.delivery/xezq/D9IkmJLyYgrHPljiPfnhTAnEZ0XQ1q2HY6yZjIyFa7CRIGbLA/tmp_k9c45j5.png "HTTP/1.1 200 OK"
+09:25:40 [INFO] src.image_pipeline: Saved branded image output\img_8180395ec167.webp
+09:25:58 [INFO] src.pipeline: Facebook disabled (facebook.enabled=false) — skipping album.
+09:25:58 [INFO] src.pipeline: Row 3 SUCCESS — web: https://revenue.com.vn/?p=839 | fb: 
+09:25:58 [INFO] src.pipeline: Kept 4 temp image(s) in output/ for inspection.
