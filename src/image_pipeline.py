@@ -76,20 +76,28 @@ class ImagePipeline:
         size = base.size[0]
 
         # Dark translucent overlay on the lower half for title legibility.
+        overlay_top = size // 2
         overlay = Image.new("RGBA", base.size, (0, 0, 0, 0))
         odraw = ImageDraw.Draw(overlay)
         alpha = int(255 * self.overlay_opacity)
-        odraw.rectangle([0, size // 2, size, size], fill=(0, 0, 0, alpha))
+        odraw.rectangle([0, overlay_top, size, size], fill=(0, 0, 0, alpha))
         base = Image.alpha_composite(base, overlay)
 
         draw = ImageDraw.Draw(base)
-        font = self._load_font(size)
-        wrapped = self._wrap_title(draw, text_title, font, max_width=int(size * 0.88))
+        # Fit the title inside the dark band: shrink the font until the whole block fits both the
+        # width and the height between the overlay top and the logo margin, so long titles never
+        # spill onto the bright area above the overlay.
+        bottom_margin = int(size * 0.22)
+        max_text_h = (size - bottom_margin) - overlay_top
+        font, wrapped = self._fit_title(
+            draw, text_title, size, max_width=int(size * 0.88), max_height=max_text_h
+        )
 
         # Position the block within the lower third, kept above the logo corner.
         line_height = self._line_height(draw, font)
         total_h = line_height * len(wrapped)
-        y = size - total_h - int(size * 0.22)
+        y = size - total_h - bottom_margin
+        y = max(y, overlay_top)  # safety: never start above the dark overlay
         for line in wrapped:
             tw = self._text_width(draw, line, font)
             x = (size - tw) // 2
@@ -112,8 +120,10 @@ class ImagePipeline:
         return self.overlay_brand_graphics(clean, text_title)
 
     # --------------------------------------------------------------- helpers
-    def _load_font(self, size: int) -> ImageFont.FreeTypeFont:
-        font_size = max(28, int(size * 0.058))
+    # Largest and smallest title font sizes, as a fraction of / floor for the image size.
+    _MIN_FONT = 28
+
+    def _font_at(self, font_size: int) -> ImageFont.FreeTypeFont:
         candidates = [self.font_path, r"C:\Windows\Fonts\arialbd.ttf", r"C:\Windows\Fonts\arial.ttf"]
         for path in candidates:
             try:
@@ -124,7 +134,24 @@ class ImagePipeline:
         logger.warning("No TrueType font found; using PIL default (may lack VN glyphs).")
         return ImageFont.load_default()
 
-    def _wrap_title(self, draw, text: str, font, max_width: int) -> list[str]:
+    def _fit_title(self, draw, text: str, size: int, max_width: int, max_height: int):
+        """Pick the largest font (down to a floor) whose wrapped block fits max_width x max_height.
+
+        Returns (font, lines). Prevents the title block from growing taller than the dark band.
+        """
+        top = max(self._MIN_FONT, int(size * 0.058))
+        for font_size in range(top, self._MIN_FONT - 1, -3):
+            font = self._font_at(font_size)
+            lines = self._wrap_lines(draw, text, font, max_width)
+            if self._line_height(draw, font) * len(lines) <= max_height:
+                return font, lines
+        # Hit the floor and still too tall: clamp the number of lines to what the band holds.
+        font = self._font_at(self._MIN_FONT)
+        lines = self._wrap_lines(draw, text, font, max_width)
+        max_lines = max(1, max_height // self._line_height(draw, font))
+        return font, lines[:max_lines]
+
+    def _wrap_lines(self, draw, text: str, font, max_width: int) -> list[str]:
         # Estimate characters-per-line from average glyph width, then refine.
         avg = max(1, self._text_width(draw, "ABCabc123", font) // 9)
         approx = max(8, max_width // avg)
@@ -134,7 +161,7 @@ class ImagePipeline:
             while self._text_width(draw, chunk, font) > max_width and " " in chunk:
                 chunk = chunk.rsplit(" ", 1)[0]
             lines.append(chunk)
-        return lines[:4]
+        return lines
 
     @staticmethod
     def _text_width(draw, text: str, font) -> int:
