@@ -56,8 +56,9 @@ def generate_seo_post(
     The body must directly SOLVE the given intent for the given audience.
 
     If `intent` is empty, the model self-analyzes the keyword + audience to determine the
-    search intent. `internal_links` is a list of {'title','url'} of existing site posts the
-    model must weave into the body as contextual internal links (5-7 recommended).
+    search intent. `internal_links` is a list of {'title','url','kind'} of existing site
+    URLs (kind: category|page|product|post) the model weaves into the body as contextual
+    internal links, 3-6 per article, prioritising money pages (category/service).
     """
     system = f"{system_prompt_web_seo}\n\n{_rules_block(banned_words)}"
 
@@ -88,14 +89,24 @@ def generate_seo_post(
 
     internal_links = internal_links or []
     if internal_links:
+        _kind_labels = {
+            "category": "DANH MỤC SẢN PHẨM",
+            "page": "TRANG",
+            "product": "SẢN PHẨM",
+            "post": "BÀI VIẾT",
+        }
         links_lines = "\n".join(
-            f'  - {l["title"]} -> {l["url"]}' for l in internal_links if l.get("url")
+            f'  - [{_kind_labels.get(l.get("kind", "page"), "TRANG")}] {l["title"]} -> {l["url"]}'
+            for l in internal_links if l.get("url")
         )
         internal_link_instruction = (
-            f"CHÈN LINK NỘI BỘ (bắt buộc): dưới đây là các bài viết VÀ trang dịch vụ đã có trên "
-            f"website (ưu tiên trỏ tới các trang dịch vụ liên quan để hỗ trợ SEO cho chúng). "
-            f"Hãy chèn TỰ NHIÊN 5-7 link trong số này vào thân bài dưới dạng "
+            f"CHÈN LINK NỘI BỘ (bắt buộc): dưới đây là các trang/bài đã có trên website, đã gắn "
+            f"nhãn loại. Hãy chèn TỰ NHIÊN 3-6 link vào thân bài dưới dạng "
             f'<a href="URL">anchor text có nghĩa</a>, đặt trong ngữ cảnh liên quan. '
+            f"THỨ TỰ ƯU TIÊN (quan trọng cho SEO): ưu tiên chèn các link [DANH MỤC SẢN PHẨM] "
+            f"và [TRANG dịch vụ] trước (đây là 'money page'); chèn TỐI ĐA 1-2 link [SẢN PHẨM] "
+            f"và chỉ khi bài thực sự nhắc tới sản phẩm đó; phần còn lại dùng [BÀI VIẾT] cùng chủ "
+            f"đề để tăng độ liên quan. Anchor text phải có nghĩa, chứa từ khóa liên quan. "
             f"CHỈ dùng đúng các URL sau, KHÔNG bịa URL mới:\n{links_lines}\n"
         )
     else:

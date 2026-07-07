@@ -38,8 +38,8 @@ def run_once(keep_images: bool = False) -> bool:
 
         # Resolve category + gather existing posts to use as internal links.
         category_id = wordpress_client.resolve_category_id(row["category"])
-        internal_links = wordpress_client.fetch_related_posts(
-            row["keyword"], category_id=category_id, count=7
+        internal_links = wordpress_client.fetch_internal_link_candidates(
+            row["keyword"], category_id=category_id, config=config
         )
         logger.info("Found %d internal link candidate(s).", len(internal_links))
 

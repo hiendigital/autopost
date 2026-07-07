@@ -18,7 +18,16 @@
   },
   "wordpress": {
     "default_post_status": "publish",
-    "seo_plugin": "rankmath"
+    "seo_plugin": "rankmath",
+    "internal_links": {
+      "auto_detect": true,
+      "include_products": true,
+      "max_products": 2,
+      "max_candidates": 10,
+      "product_post_type": "product",
+      "product_taxonomy": "product_cat",
+      "generic_terms": ["thiết kế web", "thiết kế", "website", "web"]
+    }
   },
   "facebook": {
     "enabled": true,
